@@ -11,6 +11,6 @@ public class HelloWorldEndpoint {
   @GET
   @Produces("text/plain")
   public Response get() {
-    return Response.ok("Hello from WildFly Swarm!").build();
+    return Response.ok("Hello from App Direct").build();
   }
 }

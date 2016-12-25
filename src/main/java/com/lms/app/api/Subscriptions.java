@@ -68,6 +68,8 @@ public class Subscriptions {
     }
     
     @Path("cancel")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response cancel(@Context UriInfo uriInfo) {
         try {
             // Request URL contains event url

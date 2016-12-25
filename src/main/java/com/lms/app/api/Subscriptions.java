@@ -34,18 +34,22 @@ public class Subscriptions {
     
     @Path("create")
     public Response create(@Context UriInfo uriInfo) {
-        
+
         // Request URL contains event url
-        MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters(true);
-        String eventUrl = queryParameters.getFirst(EVENT_URL);
-        
-        Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(eventUrl);
-        SubscriptionOrder subscriptionOrder = target.request(MediaType.APPLICATION_JSON).get(SubscriptionOrder.class);
-        
-        SubscriptionOrderStatus status = subscriptionDAO.create(subscriptionOrder);
-        
-        return Response.ok(status, MediaType.APPLICATION_JSON).build();
+        try {
+            MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters(true);
+            String eventUrl = queryParameters.getFirst(EVENT_URL);
+
+            Client client = ClientBuilder.newClient();
+            WebTarget target = client.target(eventUrl);
+            SubscriptionOrder subscriptionOrder = target.request(MediaType.APPLICATION_JSON).get(SubscriptionOrder.class);
+
+            SubscriptionOrderStatus status = subscriptionDAO.create(subscriptionOrder);
+
+            return Response.ok(status, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            return Response.ok(e.getMessage(), MediaType.TEXT_PLAIN).build();
+        }
     }
     
     @Path("change")

@@ -28,10 +28,16 @@ public class Events {
     
     @Path("createInfo")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
     public Response getCreateInfo(@Context HttpServletRequest servletRequest) {
         
-        boolean verify = new OAuthSigner().verify(servletRequest);
+        boolean verify = false;
+        
+        try {
+            verify = new OAuthSigner().verify(servletRequest);
+        } catch (Exception e) {
+            return Response.ok(e.getMessage()).build();
+        }
         
         String eventInfo;
         

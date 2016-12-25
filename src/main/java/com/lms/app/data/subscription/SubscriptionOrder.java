@@ -11,20 +11,20 @@ package com.lms.app.data.subscription;
  */
 public class SubscriptionOrder {
     private final String type;
-    private final MarketPlace marketPlace;
+    private final MarketPlace marketplace;
     private final Creator creator;
     private final Payload payload;
 
     public SubscriptionOrder() {
         this.type = null;
-        this.marketPlace = null;
+        this.marketplace = null;
         this.creator = null;
         this.payload = null;
     }
 
     public SubscriptionOrder(String type, MarketPlace marketPlace, Creator creator, Payload payload) {
         this.type = type;
-        this.marketPlace = marketPlace;
+        this.marketplace = marketPlace;
         this.creator = creator;
         this.payload = payload;
     }
@@ -33,8 +33,8 @@ public class SubscriptionOrder {
         return type;
     }
 
-    public MarketPlace getMarketPlace() {
-        return marketPlace;
+    public MarketPlace getMarketplace() {
+        return marketplace;
     }
 
     public Creator getCreator() {

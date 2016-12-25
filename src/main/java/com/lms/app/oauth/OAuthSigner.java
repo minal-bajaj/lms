@@ -6,8 +6,8 @@
 package com.lms.app.oauth;
 
 import com.lms.app.data.subscription.SubscriptionOrder;
-import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
+//import javax.inject.Inject;
+//import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
@@ -17,11 +17,11 @@ import javax.ws.rs.core.MediaType;
 import org.glassfish.jersey.client.oauth1.ConsumerCredentials;
 import org.glassfish.jersey.client.oauth1.OAuth1ClientSupport;
 import org.glassfish.jersey.jackson.JacksonFeature;
-import org.glassfish.jersey.oauth1.signature.OAuth1Parameters;
+/*import org.glassfish.jersey.oauth1.signature.OAuth1Parameters;
 import org.glassfish.jersey.oauth1.signature.OAuth1Request;
 import org.glassfish.jersey.oauth1.signature.OAuth1Secrets;
 import org.glassfish.jersey.oauth1.signature.OAuth1Signature;
-import org.glassfish.jersey.oauth1.signature.OAuth1SignatureException;
+import org.glassfish.jersey.oauth1.signature.OAuth1SignatureException;*/
 
 /**
  *
@@ -29,8 +29,8 @@ import org.glassfish.jersey.oauth1.signature.OAuth1SignatureException;
  */
 public class OAuthSigner {
     
-    @Inject
-    OAuth1Signature oAuthSignature;
+    //@Inject
+    //OAuth1Signature oAuthSignature;
     
     public SubscriptionOrder sendSignedRequest(String url) {
         
@@ -52,7 +52,7 @@ public class OAuthSigner {
         return request.get(SubscriptionOrder.class);
     }
     
-    public boolean verify(HttpServletRequest servletRequest) {
+    /*public boolean verify(HttpServletRequest servletRequest) {
         try {
             OAuth1Request request = new ConcreteOAuthRequest(servletRequest);
             
@@ -67,5 +67,5 @@ public class OAuthSigner {
         }
         
         return false;
-    }
+    }*/
 }

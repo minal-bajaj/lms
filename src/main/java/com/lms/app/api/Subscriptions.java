@@ -8,7 +8,9 @@ package com.lms.app.api;
 import com.lms.app.data.subscription.SubscriptionOrder;
 import com.lms.app.data.subscription.SubscriptionOrderStatus;
 import com.lms.app.db.dao.SubscriptionDAO;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -33,6 +35,8 @@ public class Subscriptions {
     }
     
     @Path("create")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
     public Response create(@Context UriInfo uriInfo) {
 
         // Request URL contains event url
@@ -48,7 +52,8 @@ public class Subscriptions {
 
             return Response.ok(status, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            return Response.ok(e.getMessage(), MediaType.TEXT_PLAIN).build();
+            String status = "{\"success\": false, \"reason\": \"%s\"}";
+            return Response.ok(String.format(status, e.getMessage()), MediaType.TEXT_PLAIN).build();
         }
     }
     

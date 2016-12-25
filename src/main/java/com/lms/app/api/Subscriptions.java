@@ -39,6 +39,13 @@ public class Subscriptions {
 
         // Request URL contains event url
         try {
+            
+            /**boolean verify = new OAuthSigner().verify(servletRequest);
+            
+            if (!verify) {
+                return Response.status(Response.Status.UNAUTHORIZED).build();
+            }*/
+            
             MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters(true);
             String eventUrl = queryParameters.getFirst(EVENT_URL);
 
@@ -68,6 +75,13 @@ public class Subscriptions {
     @Produces(MediaType.APPLICATION_JSON)
     public Response cancel(@Context UriInfo uriInfo) {
         try {
+            
+            /**boolean verify = new OAuthSigner().verify(servletRequest);
+            
+            if (!verify) {
+                return Response.status(Response.Status.UNAUTHORIZED).build();
+            }*/
+            
             // Request URL contains event url
             MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters(true);
             String eventUrl = queryParameters.getFirst(EVENT_URL);

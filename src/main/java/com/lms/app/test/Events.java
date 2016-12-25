@@ -28,21 +28,11 @@ public class Events {
     
     @Path("createInfo")
     @GET
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getCreateInfo(@Context HttpServletRequest servletRequest) {
+        //boolean verify = new OAuthSigner().verify(servletRequest);
         
-        boolean verify = false;
-        
-        try {
-            verify = new OAuthSigner().verify(servletRequest);
-        } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
-        }
-        
-        String eventInfo;
-        
-        if (verify) {
-            eventInfo = "{\n" +
+        String eventInfo = "{\n" +
 "    \"type\": \"SUBSCRIPTION_ORDER\",\n" +
 "    \"marketplace\": {\n" +
 "      \"baseUrl\": \"https://www.acme.com\",\n" +
@@ -75,41 +65,6 @@ public class Events {
 "      }\n" +
 "    }\n" +
 "    }";
-        } else {
-            eventInfo = "{\n" +
-"    \"type\": \"SUBSCRIPTION_CANCEL\",\n" +
-"    \"marketplace\": {\n" +
-"      \"baseUrl\": \"https://www.acme.com\",\n" +
-"      \"partner\": \"APPDIRECT\"\n" +
-"    },\n" +
-"    \"creator\": {\n" +
-"      \"address\": {\n" +
-"        \"firstName\": \"Sample\",\n" +
-"        \"fullName\": \"Sample Tester\",\n" +
-"        \"lastName\": \"Tester\"\n" +
-"      },\n" +
-"      \"email\": \"testuser@testco.com\",\n" +
-"      \"firstName\": \"Sample\",\n" +
-"      \"language\": \"en\",\n" +
-"      \"lastName\": \"Tester\",\n" +
-"      \"locale\": \"en_US\",\n" +
-"      \"openId\": \"https://www.acme.com/openid/id/211aa367-f53b-4606-8887-80a381e0ef69\",\n" +
-"      \"uuid\": \"211aa369-f53b-4606-8887-80a361e0ef66\"\n" +
-"    },\n" +
-"    \"payload\": {\n" +
-"      \"company\": {\n" +
-"        \"country\": \"US\",\n" +
-"        \"name\": \"Sample Testing co.\",\n" +
-"        \"uuid\": \"bd58b532-323b-4627-a828-57729489b27b\",\n" +
-"        \"website\": \"www.testerco.com\"\n" +
-"      },\n" +
-"      \"order\": {\n" +
-"        \"editionCode\": \"FREE\",\n" +
-"        \"pricingDuration\": \"MONTHLY\"\n" +
-"      }\n" +
-"    }\n" +
-"    }";
-        }
         
         return Response.ok(eventInfo, MediaType.APPLICATION_JSON).build();
     }

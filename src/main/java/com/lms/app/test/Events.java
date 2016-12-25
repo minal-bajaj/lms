@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
  *
  * @author Minal
  */
-@Path("/events/")
+@Path("/event")
 public class Events {
     
     @Path("createInfo")

@@ -55,7 +55,7 @@ public class Subscriptions {
     
     @Path("status")
     public Response status() {
-        return null;
+        return Response.ok("success").build();
     }
     
     @Path("cancel")

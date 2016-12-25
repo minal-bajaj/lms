@@ -102,7 +102,7 @@ public class Events {
 "        \"pricingDuration\": \"MONTHLY\"\n" +
 "      }\n" +
 "    }\n" +
-"    ";
+"    }";
         }
         
         return Response.ok(eventInfo, MediaType.APPLICATION_JSON).build();

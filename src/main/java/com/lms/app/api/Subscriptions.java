@@ -55,8 +55,8 @@ public class Subscriptions {
 
             return Response.ok(status, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            String status = "{\"success\": false, \"reason\": \"%s\"}";
-            return Response.ok(String.format(status, e.getMessage()), MediaType.TEXT_PLAIN).build();
+            String status = "{\"success\": false, \"reason\": \"%s\", \"stack\": \"%s\"";
+            return Response.ok(String.format(status, e.getClass().getName(), ""), MediaType.TEXT_PLAIN).build();
         }
     }
     

@@ -51,7 +51,7 @@ public class SubscriptionOrderStatus {
         }
         
         public SubscriptionOrderStatus build() {
-            return new SubscriptionOrderStatus("true", null, this.errorCode, this.message);
+            return new SubscriptionOrderStatus("false", null, this.errorCode, this.message);
         }
     }
 

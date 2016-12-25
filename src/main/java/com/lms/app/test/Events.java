@@ -10,8 +10,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 /**
  *
@@ -23,7 +27,9 @@ public class Events {
     @Path("createInfo")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCreateInfo() {
+    public Response getCreateInfo(@Context HttpHeaders httpHeaders) {
+        
+        MultivaluedMap<String, String> headerMap = httpHeaders.getRequestHeaders();
         
         String eventInfo = "{\n" +
 "    \"type\": \"SUBSCRIPTION_ORDER\",\n" +
@@ -59,7 +65,7 @@ public class Events {
 "    }\n" +
 "    }";
         
-        return Response.ok(eventInfo, MediaType.APPLICATION_JSON).build();
+        return Response.ok(headerMap, MediaType.APPLICATION_JSON).build();
     }
     
     @Path("cancelInfo")
@@ -94,7 +100,7 @@ public class Events {
 "    },\n" +
 "    \"payload\": {\n" +
 "      \"account\": {\n" +
-"        \"accountIdentifier\": \"206123\",\n" +
+"        \"accountIdentifier\": \"1\",\n" +
 "        \"status\": \"ACTIVE\"\n" +
 "      },\n" +
 "      \"order\": {\n" +

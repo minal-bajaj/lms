@@ -8,6 +8,7 @@ package com.lms.app.api;
 import com.lms.app.data.subscription.SubscriptionOrder;
 import com.lms.app.data.subscription.SubscriptionOrderStatus;
 import com.lms.app.db.dao.SubscriptionDAO;
+import com.lms.app.oauth.OAuthSigner;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -44,13 +45,14 @@ public class Subscriptions {
             MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters(true);
             String eventUrl = queryParameters.getFirst(EVENT_URL);
 
-            Client client = ClientBuilder.newClient();
-            WebTarget target = client.target(eventUrl);
-            SubscriptionOrder subscriptionOrder = target.request(MediaType.APPLICATION_JSON).get(SubscriptionOrder.class);
+            /*Client client = ClientBuilder.newClient();
+            WebTarget target = client.target(eventUrl);*/
+            
+            MultivaluedMap<String, String> subscriptionOrder = new OAuthSigner().sendSignedRequest(eventUrl);
 
-            SubscriptionOrderStatus status = subscriptionDAO.create(subscriptionOrder);
+            //SubscriptionOrderStatus status = subscriptionDAO.create(subscriptionOrder);
 
-            return Response.ok(status, MediaType.APPLICATION_JSON).build();
+            return Response.ok(subscriptionOrder, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             String status = "{\"success\": false, \"reason\": \"%s\"}";
             return Response.ok(String.format(status, e.getMessage()), MediaType.TEXT_PLAIN).build();

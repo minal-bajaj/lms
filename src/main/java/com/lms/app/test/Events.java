@@ -5,6 +5,8 @@
  */
 package com.lms.app.test;
 
+import com.lms.app.oauth.OAuthSigner;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -27,9 +29,14 @@ public class Events {
     @Path("createInfo")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCreateInfo() {
+    public Response getCreateInfo(@Context HttpServletRequest servletRequest) {
         
-        String eventInfo = "{\n" +
+        boolean verify = new OAuthSigner().verify(servletRequest);
+        
+        String eventInfo;
+        
+        if (verify) {
+            eventInfo = "{\n" +
 "    \"type\": \"SUBSCRIPTION_ORDER\",\n" +
 "    \"marketplace\": {\n" +
 "      \"baseUrl\": \"https://www.acme.com\",\n" +
@@ -62,6 +69,41 @@ public class Events {
 "      }\n" +
 "    }\n" +
 "    }";
+        } else {
+            eventInfo = "{\n" +
+"    \"type\": \"SUBSCRIPTION_CANCEL\",\n" +
+"    \"marketplace\": {\n" +
+"      \"baseUrl\": \"https://www.acme.com\",\n" +
+"      \"partner\": \"APPDIRECT\"\n" +
+"    },\n" +
+"    \"creator\": {\n" +
+"      \"address\": {\n" +
+"        \"firstName\": \"Sample\",\n" +
+"        \"fullName\": \"Sample Tester\",\n" +
+"        \"lastName\": \"Tester\"\n" +
+"      },\n" +
+"      \"email\": \"testuser@testco.com\",\n" +
+"      \"firstName\": \"Sample\",\n" +
+"      \"language\": \"en\",\n" +
+"      \"lastName\": \"Tester\",\n" +
+"      \"locale\": \"en_US\",\n" +
+"      \"openId\": \"https://www.acme.com/openid/id/211aa367-f53b-4606-8887-80a381e0ef69\",\n" +
+"      \"uuid\": \"211aa369-f53b-4606-8887-80a361e0ef66\"\n" +
+"    },\n" +
+"    \"payload\": {\n" +
+"      \"company\": {\n" +
+"        \"country\": \"US\",\n" +
+"        \"name\": \"Sample Testing co.\",\n" +
+"        \"uuid\": \"bd58b532-323b-4627-a828-57729489b27b\",\n" +
+"        \"website\": \"www.testerco.com\"\n" +
+"      },\n" +
+"      \"order\": {\n" +
+"        \"editionCode\": \"FREE\",\n" +
+"        \"pricingDuration\": \"MONTHLY\"\n" +
+"      }\n" +
+"    }\n" +
+"    ";
+        }
         
         return Response.ok(eventInfo, MediaType.APPLICATION_JSON).build();
     }

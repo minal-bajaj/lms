@@ -9,9 +9,6 @@ import com.lms.app.data.subscription.SubscriptionOrder;
 import com.lms.app.data.subscription.SubscriptionOrderStatus;
 import com.lms.app.db.DataStore;
 import com.lms.app.error.SubscriptionException;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

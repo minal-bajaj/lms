@@ -69,16 +69,21 @@ public class Subscriptions {
     
     @Path("cancel")
     public Response cancel(@Context UriInfo uriInfo) {
-        // Request URL contains event url
-        MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters(true);
-        String eventUrl = queryParameters.getFirst(EVENT_URL);
-        
-        Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(eventUrl);
-        SubscriptionOrder subscriptionOrder = target.request(MediaType.APPLICATION_JSON).get(SubscriptionOrder.class);
-        
-        SubscriptionOrderStatus cancel = subscriptionDAO.cancel(subscriptionOrder);
-        
-        return Response.ok(cancel, MediaType.APPLICATION_JSON).build();
+        try {
+            // Request URL contains event url
+            MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters(true);
+            String eventUrl = queryParameters.getFirst(EVENT_URL);
+
+            Client client = ClientBuilder.newClient();
+            WebTarget target = client.target(eventUrl);
+            SubscriptionOrder subscriptionOrder = target.request(MediaType.APPLICATION_JSON).get(SubscriptionOrder.class);
+
+            SubscriptionOrderStatus cancel = subscriptionDAO.cancel(subscriptionOrder);
+
+            return Response.ok(cancel, MediaType.APPLICATION_JSON).build();
+        } catch (Exception e) {
+            String status = "{\"success\": false, \"reason\": \"%s\"}";
+            return Response.ok(String.format(status, e.getMessage()), MediaType.TEXT_PLAIN).build();
+        }
     }
 }

@@ -43,7 +43,7 @@ public enum DataStore {
         
         String uniqueId = String.valueOf(orders.size() + 1);
         
-        this.users.add(uniqueId);
+        this.users.add(order.getCreator().getEmail());
         this.orders.put(uniqueId, order);
         return uniqueId;
     }

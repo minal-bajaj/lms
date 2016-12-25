@@ -13,6 +13,7 @@ public class Creator {
     private final Address address;
     private final String email;
     private final String firstName;
+    private final String language;
     private final String lastName;
     private final String locale;
     private final String openId;
@@ -22,16 +23,18 @@ public class Creator {
         this.address = null;
         this.email = null;
         this.firstName = null;
+        this.language = null;
         this.lastName = null;
         this.locale = null;
         this.openId = null;
         this.uuid = null;
     }
     
-    public Creator(Address address, String email, String firstName, String lastName, String locale, String openId, String uuid) {
+    public Creator(Address address, String email, String firstName, String language, String lastName, String locale, String openId, String uuid) {
         this.address = address;
         this.email = email;
         this.firstName = firstName;
+        this.language = language;
         this.lastName = lastName;
         this.locale = locale;
         this.openId = openId;
@@ -48,6 +51,10 @@ public class Creator {
 
     public String getFirstName() {
         return firstName;
+    }
+
+    public String getLanguage() {
+        return language;
     }
 
     public String getLastName() {

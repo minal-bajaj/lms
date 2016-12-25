@@ -11,11 +11,7 @@ package com.lms.app.data.subscription;
  */
 public class SubscriptionOrderStatus {
     private final String success;
-    
-    
     private final String accountIdentifier;
-    
-    
     private final String errorCode;
     private final String message;
 

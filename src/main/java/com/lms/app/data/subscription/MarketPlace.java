@@ -13,6 +13,11 @@ public class MarketPlace {
     private final String baseUrl;
     private final String partner;
 
+    public MarketPlace() {
+        this.baseUrl = null;
+        this.partner = null;
+    }
+
     public MarketPlace(String baseUrl, String partner) {
         this.baseUrl = baseUrl;
         this.partner = partner;

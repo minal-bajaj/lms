@@ -14,6 +14,12 @@ public class Address {
     private final String fullName;
     private final String lastName;
 
+    public Address() {
+        this.firstName = null;
+        this.fullName = null;
+        this.lastName = null;
+    }
+
     public Address(String firstName, String fullName, String lastName) {
         this.firstName = firstName;
         this.fullName = fullName;

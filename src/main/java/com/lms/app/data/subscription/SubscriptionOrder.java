@@ -15,6 +15,13 @@ public class SubscriptionOrder {
     private final Creator creator;
     private final Payload payload;
 
+    public SubscriptionOrder() {
+        this.type = null;
+        this.marketPlace = null;
+        this.creator = null;
+        this.payload = null;
+    }
+
     public SubscriptionOrder(String type, MarketPlace marketPlace, Creator creator, Payload payload) {
         this.type = type;
         this.marketPlace = marketPlace;

@@ -14,6 +14,11 @@ public class Account {
     private final String accountIdentifier;
     private final String status;
 
+    public Account() {
+        this.accountIdentifier = null;
+        this.status = null;
+    }
+
     public Account(String accountIdentifier, String status) {
         this.accountIdentifier = accountIdentifier;
         this.status = status;

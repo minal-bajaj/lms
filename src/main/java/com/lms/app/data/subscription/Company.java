@@ -16,6 +16,14 @@ public class Company {
     private final String uuid;
     private final String website;
 
+    public Company() {
+        this.country = null;
+        this.name = null;
+        this.phoneNumber = null;
+        this.uuid = null;
+        this.website = null;
+    }
+
     public Company(String country, String name, String phoneNumber, String uuid, String website) {
         this.country = country;
         this.name = name;

@@ -18,6 +18,16 @@ public class Creator {
     private final String openId;
     private final String uuid;
 
+    public Creator() {
+        this.address = null;
+        this.email = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.locale = null;
+        this.openId = null;
+        this.uuid = null;
+    }
+    
     public Creator(Address address, String email, String firstName, String lastName, String locale, String openId, String uuid) {
         this.address = address;
         this.email = email;

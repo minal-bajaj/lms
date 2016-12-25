@@ -16,6 +16,12 @@ public class Order {
     private final String pricingDuration;
     private final List<Item> items;
 
+    public Order() {
+        this.editionCode = null;
+        this.pricingDuration = null;
+        this.items = null;
+    }
+
     public Order(String editionCode, String pricingDuration, List<Item> items) {
         this.editionCode = editionCode;
         this.pricingDuration = pricingDuration;

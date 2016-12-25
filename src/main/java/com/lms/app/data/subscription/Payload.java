@@ -14,6 +14,12 @@ public class Payload {
     private final Order order;
     private final Account account;
 
+    public Payload() {
+        this.company = null;
+        this.order = null;
+        this.account = null;
+    }
+
     public Payload(Company company, Order order, Account account) {
         this.company = company;
         this.order = order;

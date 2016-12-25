@@ -41,7 +41,7 @@ public class OAuthSigner {
         final Feature filterFeature = OAuth1ClientSupport.builder(consumerCredentials).feature().build();
         
         final Client client = ClientBuilder.newBuilder()
-                //.register(filterFeature)
+                .register(filterFeature)
                 //.register(JacksonFeature.class)
                 .build();
     

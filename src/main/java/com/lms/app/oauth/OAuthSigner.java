@@ -34,15 +34,15 @@ public class OAuthSigner {
     
     public SubscriptionOrder sendSignedRequest(String url) {
         
-        //final ConsumerCredentials consumerCredentials = new ConsumerCredentials(
-        //        "leave-management-system-145694",
-        //        "vsFEplriw6xWJ4Si");
+        final ConsumerCredentials consumerCredentials = new ConsumerCredentials(
+                "leave-management-system-145694",
+                "vsFEplriw6xWJ4Si");
         
-        //final Feature filterFeature = OAuth1ClientSupport.builder(consumerCredentials).feature().build();
+        final Feature filterFeature = OAuth1ClientSupport.builder(consumerCredentials).feature().build();
         
         final Client client = ClientBuilder.newBuilder()
-                //.register(filterFeature)
-                //.register(JacksonFeature.class)
+                .register(filterFeature)
+                .register(JacksonFeature.class)
                 .build();
     
         WebTarget target = client.target(url);

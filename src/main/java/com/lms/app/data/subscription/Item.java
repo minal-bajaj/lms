@@ -13,6 +13,11 @@ public class Item {
     private final String quantity;
     private final String unit;
 
+    public Item() {
+        this.quantity = null;
+        this.unit = null;
+    }
+
     public Item(String quantity, String unit) {
         this.quantity = quantity;
         this.unit = unit;

@@ -55,8 +55,24 @@ public class Subscriptions {
 
             return Response.ok(status, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
-            String status = "{\"success\": false, \"reason\": \"%s\", \"stack\": \"%s\"";
-            return Response.ok(String.format(status, e.getClass().getName(), ""), MediaType.TEXT_PLAIN).build();
+            String status = "{\"success\": false, \"reason\": \"%s\", \"stack\": %s";
+            
+            StringBuffer buffer = new StringBuffer();
+            
+            buffer.append("[");
+            boolean isFirst = true;
+            
+            for (StackTraceElement element : e.getStackTrace()) {
+                if (!isFirst) {
+                    buffer.append(",");
+                }
+                
+                buffer.append("\"" + element.getClassName() + "\"");
+                buffer.append("\"" + element.getMethodName() + "\"");
+                isFirst = false;
+            }
+            
+            return Response.ok(String.format(status, e.getClass().getName(), buffer.toString()), MediaType.TEXT_PLAIN).build();
         }
     }
     

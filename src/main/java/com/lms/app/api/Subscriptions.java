@@ -12,9 +12,6 @@ import com.lms.app.oauth.OAuthSigner;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
@@ -45,14 +42,11 @@ public class Subscriptions {
             MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters(true);
             String eventUrl = queryParameters.getFirst(EVENT_URL);
 
-            /*Client client = ClientBuilder.newClient();
-            WebTarget target = client.target(eventUrl);*/
-            
-            MultivaluedMap<String, String> subscriptionOrder = new OAuthSigner().sendSignedRequest(eventUrl);
+            SubscriptionOrder subscriptionOrder = new OAuthSigner().sendSignedRequest(eventUrl);
 
-            //SubscriptionOrderStatus status = subscriptionDAO.create(subscriptionOrder);
+            SubscriptionOrderStatus status = subscriptionDAO.create(subscriptionOrder);
 
-            return Response.ok(subscriptionOrder, MediaType.APPLICATION_JSON).build();
+            return Response.ok(status, MediaType.APPLICATION_JSON).build();
         } catch (Exception e) {
             String status = "{\"success\": false, \"reason\": \"%s\"}";
             return Response.ok(String.format(status, e.getMessage()), MediaType.TEXT_PLAIN).build();
@@ -78,9 +72,7 @@ public class Subscriptions {
             MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters(true);
             String eventUrl = queryParameters.getFirst(EVENT_URL);
 
-            Client client = ClientBuilder.newClient();
-            WebTarget target = client.target(eventUrl);
-            SubscriptionOrder subscriptionOrder = target.request(MediaType.APPLICATION_JSON).get(SubscriptionOrder.class);
+            SubscriptionOrder subscriptionOrder = new OAuthSigner().sendSignedRequest(eventUrl);
 
             SubscriptionOrderStatus cancel = subscriptionDAO.cancel(subscriptionOrder);
 

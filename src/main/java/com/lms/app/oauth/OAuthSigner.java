@@ -23,7 +23,7 @@ import org.glassfish.jersey.jackson.JacksonFeature;
  */
 public class OAuthSigner {
     
-    public MultivaluedMap<String, String> sendSignedRequest(String url) {
+    public SubscriptionOrder sendSignedRequest(String url) {
         
         final ConsumerCredentials consumerCredentials = new ConsumerCredentials(
                 "leave-management-system-145694",
@@ -40,10 +40,6 @@ public class OAuthSigner {
         
         Invocation.Builder request = target.request(MediaType.APPLICATION_JSON);
         
-        return request.get(MultivaluedMap.class);
-    }
-    
-    public static void main(String[] args) {
-        new OAuthSigner().sendSignedRequest("https://appdirectlms.herokuapp.com/Fevent/createInfo");
+        return request.get(SubscriptionOrder.class);
     }
 }

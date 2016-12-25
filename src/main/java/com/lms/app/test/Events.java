@@ -27,9 +27,7 @@ public class Events {
     @Path("createInfo")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCreateInfo(@Context HttpHeaders httpHeaders) {
-        
-        MultivaluedMap<String, String> headerMap = httpHeaders.getRequestHeaders();
+    public Response getCreateInfo() {
         
         String eventInfo = "{\n" +
 "    \"type\": \"SUBSCRIPTION_ORDER\",\n" +
@@ -65,7 +63,7 @@ public class Events {
 "    }\n" +
 "    }";
         
-        return Response.ok(headerMap, MediaType.APPLICATION_JSON).build();
+        return Response.ok(eventInfo, MediaType.APPLICATION_JSON).build();
     }
     
     @Path("cancelInfo")
